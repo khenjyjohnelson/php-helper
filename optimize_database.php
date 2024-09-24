@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "internship_recycleaware";
+$dbname = "college_5_merdeka_agraris";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -17,24 +17,21 @@ $sql = "SHOW TABLES";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    // Loop through each table
-    while($row = $result->fetch_row()) {
+    while ($row = $result->fetch_row()) {
         $tableName = $row[0];
 
-        // Add created_at and updated_at fields to each table
-        $alterTableSql = "ALTER TABLE `$tableName` 
-                          MODIFY `created_at` DATETIME NULL, 
-                          MODIFY `updated_at` DATETIME NULL";
-
-        if ($conn->query($alterTableSql) === TRUE) {
-            echo "Table '$tableName' updated successfully.<br>";
+        // Optimize each table
+        $optimizeSql = "OPTIMIZE TABLE `$tableName`";
+        if ($conn->query($optimizeSql) === TRUE) {
+            echo "Table '$tableName' optimized successfully.<br>";
         } else {
-            echo "Error updating table '$tableName': " . $conn->error . "<br>";
+            echo "Error optimizing table '$tableName': " . $conn->error . "<br>";
         }
     }
 } else {
     echo "No tables found in the database.";
 }
 
+// Close connection
 $conn->close();
 ?>

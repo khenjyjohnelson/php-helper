@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "internship_recycleaware";
+$dbname = "college_5_merdeka_agraris";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
