@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "college_5_merdeka_agraris";
+$dbname = "personal_keyservice";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -23,7 +23,10 @@ if ($result->num_rows > 0) {
 
         // Add created_at and updated_at fields to each table
         $alterTableSql = "ALTER TABLE `$tableName` 
-                          MODIFY `deleted_at` DATETIME NULL";
+                          ADD `created_at` DATETIME NULL,
+                          ADD `updated_at` DATETIME NULL,
+                          ADD `updated_by` VARCHAR(255) NULL,
+                          ADD `deleted_at` DATETIME NULL";
 
         if ($conn->query($alterTableSql) === TRUE) {
             echo "Table '$tableName' updated successfully.<br>";
